@@ -10,6 +10,19 @@ Welcome to your new app.
 
 <MContainer Class="px-0"
             Fluid>
+    <MRadioGroup @bind-Value="_radioGroup">
+        @for (var i = 0; i < 3; i++)
+        {
+            var n = i + 1;
+            <MRadio @key="n"
+                Label="@($"Radio {n}")"
+                Value="n"></MRadio>
+        }
+    </MRadioGroup>
+</MContainer>
+
+<MContainer Class="px-0"
+            Fluid>
     <MRadioGroup @bind-Value="SelectLanguageItem">
         @foreach (var item in LanguageItems)
         {
@@ -19,13 +32,25 @@ Welcome to your new app.
         }
 
     </MRadioGroup>
+
+    <div>
+        @(SelectLanguageItem.Value)
+    </div>
+    
+    <div>
+        @foreach (var item in LanguageItems)
+        {
+            @item.Value
+        }
+    </div>
+    
 </MContainer>
 
 
 @code {
-    
+    private int _radioGroup = 1;
     private LanguageItem SelectLanguageItem = LanguageItems[0];
-    public readonly static List<LanguageItem> LanguageItems = new List<LanguageItem>()
+    public static List<LanguageItem> LanguageItems = new List<LanguageItem>()
         {
             new LanguageItem("中文","zh-CN"),
             new LanguageItem("English","en-US")
